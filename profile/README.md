@@ -14,7 +14,7 @@ MyAstroBoard brings everything an astrophotographer needs before heading out int
 - 📒 **Astrodex** — your personal catalog of captured objects, with metadata and imaging details
 - 🌤️ **Observing conditions** — real-time forecasts and trends (Open-Meteo)
 - 🌕 **Ephemerides** — moon, sun, eclipses, aurora forecasts and ISS passes
-- 🗂️ **Multiple catalogues** — Messier, Herschel 400, OpenNGC, LBN, LDN… via the [UpTonight](https://github.com/mawinkler/uptonight) integration
+- 🗂️ **Multiple catalogues** — Messier, Herschel 400, OpenNGC, LBN, LDN…
 - 🛠️ **Equipment profiles** — telescopes, cameras, mounts, filters + field-of-view calculator
 - 🌍 **Multilingual** — English and French (human translation), Spanish, German, ...
 
