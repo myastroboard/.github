@@ -36,12 +36,23 @@ The image processing companion: a self-hosted editor for enhancement, depth effe
 docker pull myastroboard/myastroshine:latest
 ```
 
+#### 🧩 [MyAstroBoard Card](https://github.com/myastroboard/lovelace-myastroboard-card)
+A Home Assistant Lovelace card for MyAstroBoard: sky conditions, tonight's plan and your Astrodex activity, right on your dashboard.
+
+- 🌌 **Sky now** - night score, sky period, Moon phase and live weather
+- 🌃 **Tonight** - best observing window, top 5 targets, next ISS/CSS pass
+- 📊 **Activity** - Astrodex stats, sessions, current Plan My Night target
+- 🖱️ **Click-through** - every tile opens the entity's more-info dialog
+- 🌍 **Localized** - English, French, Spanish, German, Italian, Portuguese
+- ⚡ **Zero YAML** - visual editor with device auto-discovery via MQTT
+
 ---
 
 ### 🚀 Get started
 
 - **MyAstroBoard**: [code](https://github.com/myastroboard/myastroboard), [installation](https://github.com/myastroboard/myastroboard/blob/main/docs/1.INSTALLATION.md), [quick start](https://github.com/myastroboard/myastroboard/blob/main/docs/2.QUICKSTART.md), [visual tour](https://github.com/myastroboard/myastroboard/blob/main/docs/VISUAL_TOUR.md)
 - **MyAstroShine**: [code](https://github.com/myastroboard/myastroshine), [features](https://github.com/myastroboard/myastroshine/blob/main/docs/FEATURES.md), [deployment](https://github.com/myastroboard/myastroshine/blob/main/docs/DEPLOYMENT.md)
+- **MyAstroBoard Card**: [code](https://github.com/myastroboard/lovelace-myastroboard-card), [preview & config](https://github.com/myastroboard/lovelace-myastroboard-card/blob/main/README.md#preview)
 
 ---
 
