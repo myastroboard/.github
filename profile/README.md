@@ -46,6 +46,14 @@ A Home Assistant Lovelace card for MyAstroBoard: sky conditions, tonight's plan 
 - 🌍 **Localized** - English, French, Spanish, German, Italian, Portuguese
 - ⚡ **Zero YAML** - visual editor with device auto-discovery via MQTT
 
+#### 🏠 [MyAstroBoard for Home Assistant](https://github.com/myastroboard/home-assistant-apps) - *Experimental*
+Run MyAstroBoard as a Home Assistant app (formerly add-on): no Docker to set up, one click from the app store.
+
+- 📦 **One-click install** - add the repository, install, open the web UI
+- 💾 **Backed up with Home Assistant** - your data is included in HA backups
+- 🔄 **Follows every release** - updates offered right in Home Assistant
+- 🖥️ **amd64 & aarch64** - Raspberry Pi 4/5, Home Assistant Green/Yellow, any x86 PC
+
 ---
 
 ### 🚀 Get started
@@ -53,6 +61,7 @@ A Home Assistant Lovelace card for MyAstroBoard: sky conditions, tonight's plan 
 - **MyAstroBoard**: [code](https://github.com/myastroboard/myastroboard), [installation](https://github.com/myastroboard/myastroboard/blob/main/docs/1.INSTALLATION.md), [quick start](https://github.com/myastroboard/myastroboard/blob/main/docs/2.QUICKSTART.md), [visual tour](https://github.com/myastroboard/myastroboard/blob/main/docs/VISUAL_TOUR.md)
 - **MyAstroShine**: [code](https://github.com/myastroboard/myastroshine), [features](https://github.com/myastroboard/myastroshine/blob/main/docs/FEATURES.md), [deployment](https://github.com/myastroboard/myastroshine/blob/main/docs/DEPLOYMENT.md)
 - **MyAstroBoard Card**: [code](https://github.com/myastroboard/lovelace-myastroboard-card), [preview & config](https://github.com/myastroboard/lovelace-myastroboard-card/blob/main/README.md#preview)
+- **MyAstroBoard for Home Assistant**: [app repository](https://github.com/myastroboard/home-assistant-apps), [documentation](https://github.com/myastroboard/home-assistant-apps/blob/main/myastroboard/DOCUMENTATION.md)
 
 ---
 
