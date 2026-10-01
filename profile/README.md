@@ -37,6 +37,8 @@ docker pull myastroboard/myastroshine:latest
 ```
 
 #### 🧩 [MyAstroBoard Card](https://github.com/myastroboard/lovelace-myastroboard-card)
+![HA Badge](https://img.shields.io/badge/Home%20Assistant-Lovelace%20card-blue)
+
 A Home Assistant Lovelace card for MyAstroBoard: sky conditions, tonight's plan and your Astrodex activity, right on your dashboard.
 
 - 🌌 **Sky now** - night score, sky period, Moon phase and live weather
@@ -47,6 +49,8 @@ A Home Assistant Lovelace card for MyAstroBoard: sky conditions, tonight's plan 
 - ⚡ **Zero YAML** - visual editor with device auto-discovery via MQTT
 
 #### 🏠 [MyAstroBoard for Home Assistant](https://github.com/myastroboard/home-assistant-apps) - *Experimental*
+![HA Badge](https://img.shields.io/badge/Home%20Assistant-Apps-blue)
+
 Run MyAstroBoard as a Home Assistant app (formerly add-on): no Docker to set up, one click from the app store.
 
 - 📦 **One-click install** - add the repository, install, open the web UI
