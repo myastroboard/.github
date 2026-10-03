@@ -51,14 +51,18 @@ jobs:
           path: target
 
       - name: Copy the standards
+        id: copy
         env:
           PYTHON_REPO: ${{ matrix.python }}
         run: |
-          install -D -m 644 source/standards/ORG_STANDARDS.md \
-            target/.github/instructions/org-standards.instructions.md
+          paths=".github/instructions/org-standards.instructions.md"
+          install -D -m 644 source/standards/ORG_STANDARDS.md "target/$paths"
           if [ "$PYTHON_REPO" = true ]; then
             install -D -m 644 source/standards/ruff.base.toml target/.github/org/ruff.base.toml
+            paths="$paths,.github/org/ruff.base.toml"
           fi
+          # Only the files copied for this repository: git add fails on a missing path.
+          echo "paths=$paths" >> "$GITHUB_OUTPUT"
 
       - name: Open or update the pull request
         uses: peter-evans/create-pull-request@v8
@@ -67,9 +71,7 @@ jobs:
           token: ${{ secrets.ORG_SYNC_TOKEN }}
           branch: chore/org-standards-sync
           delete-branch: true
-          add-paths: |
-            .github/instructions/org-standards.instructions.md
-            .github/org/ruff.base.toml
+          add-paths: ${{ steps.copy.outputs.paths }}
           commit-message: "chore: sync organization standards"
           title: "chore: sync organization standards"
           body: |
