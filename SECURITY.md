@@ -39,7 +39,7 @@ Security fixes are applied to the **latest released version** of each project. W
 
 ## Scope and self-hosting
 
-MyAstroBoard projects are typically **self-hosted**. While we work to keep the software itself secure, the security of a deployment also depends on how it is operated — keep your instance updated, restrict network exposure as appropriate, and follow the deployment guidance in each repository's documentation.
+MyAstroBoard projects are typically **self-hosted**. While we work to keep the software itself secure, the security of a deployment also depends on how it is operated: keep your instance updated, restrict network exposure as appropriate, and follow the deployment guidance in each repository's documentation.
 
 ## Safe harbor
 

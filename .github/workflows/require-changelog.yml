@@ -1,0 +1,76 @@
+# Reusable workflow: a pull request from a feature/ or fix/ branch must update the changelog.
+#
+# Called from any repository of the organization with:
+#
+#   name: Require Changelog Entry
+#   on:
+#     pull_request:
+#       types: [opened, synchronize, reopened, ready_for_review]
+#   jobs:
+#     changelog:
+#       uses: myastroboard/.github/.github/workflows/require-changelog.yml@main
+#
+# See standards/ORG_STANDARDS.md, section "Changelog".
+
+name: Require Changelog Entry
+
+on:
+  workflow_call:
+    inputs:
+      changelog-path:
+        description: Path of the changelog file, relative to the repository root.
+        type: string
+        default: CHANGELOG.md
+      branch-prefixes:
+        description: Space-separated branch prefixes that must update the changelog.
+        type: string
+        default: "feature/ fix/"
+
+permissions:
+  contents: read
+
+jobs:
+  require-changelog:
+    name: Changelog updated (feature/fix branches)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skip outside pull requests
+        if: github.event_name != 'pull_request'
+        run: echo "Only enforced on pull_request events - skipping."
+
+      - name: Checkout repository
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+
+      - name: Check the changelog was updated
+        if: github.event_name == 'pull_request'
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          CHANGELOG_PATH: ${{ inputs.changelog-path }}
+          BRANCH_PREFIXES: ${{ inputs.branch-prefixes }}
+        run: |
+          required=false
+          for prefix in $BRANCH_PREFIXES; do
+            case "$HEAD_REF" in "$prefix"*) required=true ;; esac
+          done
+          if [ "$required" != true ]; then
+            echo "Branch '$HEAD_REF' is not one of: $BRANCH_PREFIXES - no changelog entry required."
+            exit 0
+          fi
+
+          # actions/checkout checks out refs/pull/N/merge on pull_request events: a merge commit
+          # whose first parent is the base branch, so HEAD^1..HEAD is exactly the PR's changes.
+          parents=$(git rev-list --parents -n 1 HEAD | wc -w)
+          if [ "$parents" -ne 3 ]; then
+            echo "::error::Expected HEAD to be the pull request merge commit (refs/pull/N/merge)."
+            exit 1
+          fi
+
+          if git diff --name-only HEAD^1 HEAD | grep -qxF "$CHANGELOG_PATH"; then
+            echo "$CHANGELOG_PATH updated."
+          else
+            echo "::error file=$CHANGELOG_PATH::Branch '$HEAD_REF' does not update $CHANGELOG_PATH. Add a one- or two-line bullet under '## [Unreleased]' (Features / Fixes / Breaking changes)."
+            exit 1
+          fi

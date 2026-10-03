@@ -1,0 +1,81 @@
+# Copies the shared standards into every repository of the organization, through one pull request
+# per repository (branch chore/org-standards-sync, updated in place on each later change).
+#
+# Requires the ORG_SYNC_TOKEN secret: see standards/README.md.
+
+name: Sync organization standards
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "standards/ORG_STANDARDS.md"
+      - "standards/ruff.base.toml"
+      - ".github/workflows/sync-standards.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-standards
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: ${{ matrix.repo }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { repo: myastroboard, python: true }
+          - { repo: myastroshine, python: true }
+          - { repo: myastroshot, python: true }
+          - { repo: myastrocast, python: true }
+          - { repo: lovelace-myastroboard-card, python: false }
+          - { repo: home-assistant-apps, python: false }
+          - { repo: website, python: false }
+
+    steps:
+      - name: Checkout standards
+        uses: actions/checkout@v7
+        with:
+          path: source
+
+      - name: Checkout ${{ matrix.repo }}
+        uses: actions/checkout@v7
+        with:
+          repository: myastroboard/${{ matrix.repo }}
+          token: ${{ secrets.ORG_SYNC_TOKEN }}
+          path: target
+
+      - name: Copy the standards
+        env:
+          PYTHON_REPO: ${{ matrix.python }}
+        run: |
+          install -D -m 644 source/standards/ORG_STANDARDS.md \
+            target/.github/instructions/org-standards.instructions.md
+          if [ "$PYTHON_REPO" = true ]; then
+            install -D -m 644 source/standards/ruff.base.toml target/.github/org/ruff.base.toml
+          fi
+
+      - name: Open or update the pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          path: target
+          token: ${{ secrets.ORG_SYNC_TOKEN }}
+          branch: chore/org-standards-sync
+          delete-branch: true
+          add-paths: |
+            .github/instructions/org-standards.instructions.md
+            .github/org/ruff.base.toml
+          commit-message: "chore: sync organization standards"
+          title: "chore: sync organization standards"
+          body: |
+            Automated copy of the organization standards from
+            [myastroboard/.github@${{ github.sha }}](https://github.com/myastroboard/.github/commit/${{ github.sha }}).
+
+            Do not edit these files here: change them in
+            [myastroboard/.github](https://github.com/myastroboard/.github/tree/main/standards),
+            and this pull request updates itself.
