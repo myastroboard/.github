@@ -21,7 +21,7 @@ The self-hosted dashboard for planning your session: weather, observing conditio
 docker pull myastroboard/myastroboard:latest
 ```
 
-#### ✨ [MyAstroShine](https://github.com/myastroboard/myastroshine) - *Beta*
+#### ✨ [MyAstroShine](https://github.com/myastroboard/myastroshine)
 The image processing companion: a self-hosted editor for enhancement, depth effects and stacking - no account, no cloud upload.
 
 - 🖌️ **Workflow editor** - framing, background corrections, curves, colour, detail
