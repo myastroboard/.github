@@ -11,6 +11,7 @@ on:
     paths:
       - "standards/ORG_STANDARDS.md"
       - "standards/ruff.base.toml"
+      - "standards/pyright.base.json"
       - ".github/workflows/sync-standards.yml"
   workflow_dispatch:
 
@@ -59,7 +60,8 @@ jobs:
           install -D -m 644 source/standards/ORG_STANDARDS.md "target/$paths"
           if [ "$PYTHON_REPO" = true ]; then
             install -D -m 644 source/standards/ruff.base.toml target/.github/org/ruff.base.toml
-            paths="$paths,.github/org/ruff.base.toml"
+            install -D -m 644 source/standards/pyright.base.json target/.github/org/pyright.base.json
+            paths="$paths,.github/org/ruff.base.toml,.github/org/pyright.base.json"
           fi
           # Only the files copied for this repository: git add fails on a missing path.
           echo "paths=$paths" >> "$GITHUB_OUTPUT"

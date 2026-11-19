@@ -6,6 +6,7 @@ The single source of the rules and shared configuration of every MyAstroBoard re
 |---|---|---|
 | [ORG_STANDARDS.md](ORG_STANDARDS.md) | `.github/instructions/org-standards.instructions.md` | all |
 | [ruff.base.toml](ruff.base.toml) | `.github/org/ruff.base.toml` | Python repositories |
+| [pyright.base.json](pyright.base.json) | `.github/org/pyright.base.json` | Python repositories |
 
 ## How a change reaches the repositories
 
@@ -23,6 +24,10 @@ The single source of the rules and shared configuration of every MyAstroBoard re
 - Its `ruff.toml` (or `[tool.ruff]` in `pyproject.toml`) extends the baseline:
   `extend = ".github/org/ruff.base.toml"`, then adds rules with `extend-select`. Using `select`
   instead would replace the baseline rules, not add to them.
+- Its `pyrightconfig.json`, at the root, extends the type-checking baseline:
+  `"extends": ".github/org/pyright.base.json"`, then sets its own paths (`include`, `exclude`,
+  `extraPaths`) and `pythonVersion`. The baseline holds no paths, because pyright resolves a base
+  file's paths relative to that file, not to the repository root.
 
 ## Adding a repository
 
